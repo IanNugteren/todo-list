@@ -4,4 +4,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/lists', 'ListsController@index');
+Route::resource('lists', 'ListsController');
