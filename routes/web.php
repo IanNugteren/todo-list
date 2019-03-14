@@ -1,7 +1,4 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'ListsController@index');
 Route::resource('lists', 'ListsController');

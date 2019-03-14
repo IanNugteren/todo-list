@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ListModel;
+use App\Http\Requests\ListRequest;
 
 class ListsController extends Controller
 {
@@ -26,7 +27,7 @@ class ListsController extends Controller
      */
     public function create()
     {
-        //
+        return view ('lists.create');
     }
 
     /**
@@ -35,9 +36,13 @@ class ListsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ListRequest $listRequest)
     {
-        //
+        $list = new ListModel;
+        $list->title = $listRequest->title;
+        $list->save();
+
+        return redirect('/lists');
     }
 
     /**
@@ -46,9 +51,9 @@ class ListsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ListModel $listModel)
     {
-        //
+        return view ('lists.show', compact('listModel'));
     }
 
     /**
@@ -57,9 +62,9 @@ class ListsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ListModel $listModel)
     {
-        //
+        return view ('lists.edit', compact('listModel'));
     }
 
     /**
@@ -69,9 +74,13 @@ class ListsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ListModel $listModel, ListRequest $listRequest)
     {
-        //
+        dd($listModel->title);
+        // $listModel->title = $listRequest->title;
+        // $listModel->update();
+
+        // return redirect('/lists');
     }
 
     /**
@@ -80,8 +89,10 @@ class ListsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ListModel $listModel)
     {
-        //
+        $listModel->delete();
+
+        return redirect('/lists');
     }
 }
