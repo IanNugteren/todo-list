@@ -1,1 +1,1 @@
-<h1>{{ $listModel->title }}</h1>
+<h1>{{ $list->title }}</h1>

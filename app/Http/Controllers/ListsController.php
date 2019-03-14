@@ -51,9 +51,9 @@ class ListsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ListModel $listModel)
+    public function show(ListModel $list)
     {
-        return view ('lists.show', compact('listModel'));
+        return view ('lists.show', compact('list'));
     }
 
     /**
@@ -62,9 +62,9 @@ class ListsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ListModel $listModel)
+    public function edit(ListModel $list)
     {
-        return view ('lists.edit', compact('listModel'));
+        return view ('lists.edit', compact('list'));
     }
 
     /**
@@ -74,13 +74,12 @@ class ListsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ListModel $listModel, ListRequest $listRequest)
+    public function update(ListModel $list, ListRequest $listRequest)
     {
-        dd($listModel->title);
-        // $listModel->title = $listRequest->title;
-        // $listModel->update();
+        $list->title = $listRequest->title;
+        $list->update();
 
-        // return redirect('/lists');
+        return redirect('/lists');
     }
 
     /**
@@ -89,9 +88,9 @@ class ListsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ListModel $listModel)
+    public function destroy(ListModel $list)
     {
-        $listModel->delete();
+        $list->delete();
 
         return redirect('/lists');
     }
